@@ -2,11 +2,11 @@
 
 stdenv.mkDerivation rec {
   pname = "selenium-server";
-  version = "4.16.0";
+  version = "4.18.0";
 
   src = fetchurl {
     url = "https://github.com/SeleniumHQ/selenium/releases/download/selenium-${version}/selenium-server-${version}.jar";
-    sha256 = "sha256-9E5gElR5IWr5Ffq/VY0gdhiG7rSI/xKzRyBNvHD2Rsc=";
+    sha256 = "sha256-6mRqDO23dxUW5+RWbeg0GSOSXpGjhMwqQ6euep4VD54=";
   };
 
   dontUnpack = true;
@@ -18,13 +18,14 @@ stdenv.mkDerivation rec {
     mkdir -p $out/share/lib/${pname}-${version}
     cp $src $out/share/lib/${pname}-${version}/${pname}-${version}.jar
     makeWrapper ${jre}/bin/java $out/bin/selenium-server \
-      --add-flags "-jar $out/share/lib/${pname}-${version}/${pname}-${version}.jar" \
-      --prefix PATH : "${chromedriver}/bin" \
-      --prefix PATH : "${htmlunit-driver}/bin"
+      --add-flags "-jar $out/share/lib/${pname}-${version}/${pname}-${version}.jar"
   '';
 
-  meta = {
+  meta = with lib; {
     homepage = "http://www.seleniumhq.org/";
+    sourceProvenance = with sourceTypes; [ binaryBytecode ];
+    license = licenses.asl20;
     description = "Selenium Server for remote WebDriver";
+    platforms = platforms.all;
   };
 }
