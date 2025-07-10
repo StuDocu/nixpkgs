@@ -1,0 +1,22 @@
+{
+  "nixEnvSelector.nixFile": "${workspaceFolder}/flake.nix",
+  // nil configuration documentation :
+  // https://github.com/oxalica/nil/blob/main/docs/configuration.md
+  "nix.enableLanguageServer": true,
+  "nix.serverPath": "nil",
+  "nix.serverSettings": {
+    "nil": {
+      "diagnostics": {
+        "ignored": [
+          "unused_binding",
+          "unused_with"
+        ],
+      },
+      "formatting": {
+        "command": [
+          "alejandra"
+        ],
+      },
+    },
+  },
+}

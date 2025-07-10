@@ -1,5 +1,10 @@
-{ lib, stdenv, fetchurl, makeWrapper, jre, htmlunit-driver, chromedriver }:
-
+{
+  lib,
+  stdenv,
+  fetchurl,
+  makeWrapper,
+  jre,
+}:
 stdenv.mkDerivation rec {
   pname = "selenium-server";
   version = "4.18.0";
@@ -11,8 +16,8 @@ stdenv.mkDerivation rec {
 
   dontUnpack = true;
 
-  nativeBuildInputs = [ makeWrapper ];
-  buildInputs = [ jre ];
+  nativeBuildInputs = [makeWrapper];
+  buildInputs = [jre];
 
   installPhase = ''
     mkdir -p $out/share/lib/${pname}-${version}
@@ -23,7 +28,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     homepage = "http://www.seleniumhq.org/";
-    sourceProvenance = with sourceTypes; [ binaryBytecode ];
+    sourceProvenance = with sourceTypes; [binaryBytecode];
     license = licenses.asl20;
     description = "Selenium Server for remote WebDriver";
     platforms = platforms.all;
